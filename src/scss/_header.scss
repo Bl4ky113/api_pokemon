@@ -1,0 +1,47 @@
+
+.header {
+  padding: 1em;
+
+  background-color: $color_red_pokeball;
+
+  grid-area: header;
+
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: space-evenly;
+
+  .header__title {
+    padding: 0.15rem 0.25rem;
+    
+    font: 800 2em "Ubuntu", sans-serif;
+    color: $color_white_pokeball;
+    text-align: center;
+    
+    border-bottom: 5px solid $color_darkred_pokeball;
+    border-bottom-left-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+
+  .header__icon {
+    width: 1.5em;
+    height: 1.5em;
+
+    margin: 0 2rem;
+    border-radius: 0.5em;
+
+    background-color: $color_darkred_pokeball;
+    background-image: url('../img/pokeball.png');
+  }
+
+  .header__author {
+    font: 400 1.5em "Gemunu Libre", sans-serif;
+    color: $color_darkred_pokeball;
+    text-align: center;
+    text-decoration: underline;
+  }
+}
