@@ -1,4 +1,53 @@
 
 .footer {
+  padding: 0.5rem 2rem;
+
+  background-color: $color_darkred_pokeball;
+
   grid-area: footer;
+
+  display: grid;
+  grid-template: auto / 1fr 1fr 1fr;
+
+  .section { grid-column: span 1; grid-row: span 1; }
+
+  .footer__title {
+    padding: 0.05rem 0.5rem;
+    border-bottom: 2px solid $color_lightred_pokeball;
+    margin: 0.5rem;
+
+    color: $color_white_pokeball;
+    font: 800 1.5em "Ubuntu", sans-serif;
+  }
+
+  .li {
+    padding: 0.25rem 0.5rem;
+    border-left: 2px solid $color_lightred_pokeball;
+    
+    list-style: none;
+
+    .li__obj {
+      &::before {
+        content: "\f101";
+
+        color: $color_lightred_pokeball;
+        font: 500 1em "FontAwesome";
+      }
+
+      color: $color_white_pokeball;
+      font: 400 0.9em "Ubuntu", sans-serif;
+    }
+
+    .li__link {
+      color: $color_white_pokeball;
+      font: 600 1em "Ubuntu", sans-serif;
+      text-decoration: underline $color_lightred_pokeball;
+
+      transition: 500ms ease color;
+
+      &:hover {
+        color: $color_lightred_pokeball;
+      }
+    } 
+  }
 }

@@ -17,59 +17,9 @@
 
 $color_red_pokeball: rgb(226, 62, 62);
 $color_darkred_pokeball: rgb(206, 32, 32);
+$color_lightred_pokeball: rgb(255, 102, 102);
 $color_white_pokeball: rgb(255, 255, 255);
 
 @import "./header";
 @import "./main";
 @import "./footer";
-
-.footer {
-  padding: 0.5rem 2rem;
-
-  background-color: $color_darkred_pokeball;
-
-  display: grid;
-  grid-template: auto / 1fr 1fr 1fr;
-
-  .section { grid-column: span 1; grid-row: span 1; }
-
-  .footer__title {
-    padding: 0.05rem 0.5rem;
-    border-bottom: 2px solid $color_red_pokeball;
-    margin: 0.5rem;
-
-    color: $color_white_pokeball;
-    font: 800 1.5em "Ubuntu", sans-serif;
-  }
-
-  .li {
-    padding: 0.25rem 0.5rem;
-    border-left: 2px solid $color_red_pokeball;
-    
-    list-style: none;
-
-    .li__obj {
-      &::before {
-        content: "\f101";
-
-        color: $color_red_pokeball;
-        font: 500 1em "FontAwesome";
-      }
-
-      color: $color_white_pokeball;
-      font: 400 0.9em "Ubuntu", sans-serif;
-    }
-
-    .li__link {
-      color: $color_white_pokeball;
-      font: 600 1em "Ubuntu", sans-serif;
-      text-decoration: underline $color_red_pokeball;
-
-      transition: 500ms ease color;
-
-      &:hover {
-        color: $color_red_pokeball;
-      }
-    } 
-  }
-}

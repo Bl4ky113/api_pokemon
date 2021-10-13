@@ -1,6 +1,6 @@
 
 .header {
-  padding: 1em;
+  padding: 0.5em;
 
   background-color: $color_red_pokeball;
 
@@ -10,6 +10,12 @@
   flex-flow: row nowrap;
   align-items: center;
   justify-content: space-evenly;
+
+  .header-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
 
   .header__title {
     padding: 0.15rem 0.25rem;
@@ -28,14 +34,15 @@
   }
 
   .header__icon {
-    width: 1.5em;
-    height: 1.5em;
+    width: 4em;
+    height: auto;
 
+    padding: 0.15rem 0.25rem;
     margin: 0 2rem;
     border-radius: 0.5em;
 
-    background-color: $color_darkred_pokeball;
-    background-image: url('../img/pokeball.png');
+    background-color: transparent;
+    background-image: url('../img/pokeball_red.png');
   }
 
   .header__author {
