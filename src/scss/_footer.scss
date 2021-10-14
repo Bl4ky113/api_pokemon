@@ -2,7 +2,7 @@
 .footer {
   padding: 0.5rem 2rem;
 
-  background-color: $color_darkred_pokeball;
+  background-color: $color_darkred;
 
   grid-area: footer;
 
@@ -13,16 +13,16 @@
 
   .footer__title {
     padding: 0.05rem 0.5rem;
-    border-bottom: 2px solid $color_lightred_pokeball;
+    border-bottom: 2px solid $color_lightred;
     margin: 0.5rem;
 
-    color: $color_white_pokeball;
+    color: $color_white;
     font: 800 1.5em "Ubuntu", sans-serif;
   }
 
   .li {
     padding: 0.25rem 0.5rem;
-    border-left: 2px solid $color_lightred_pokeball;
+    border-left: 2px solid $color_lightred;
     
     list-style: none;
 
@@ -30,23 +30,23 @@
       &::before {
         content: "\f101";
 
-        color: $color_lightred_pokeball;
+        color: $color_lightred;
         font: 500 1em "FontAwesome";
       }
 
-      color: $color_white_pokeball;
+      color: $color_white;
       font: 400 0.9em "Ubuntu", sans-serif;
     }
 
     .li__link {
-      color: $color_white_pokeball;
+      color: $color_white;
       font: 600 1em "Ubuntu", sans-serif;
-      text-decoration: underline $color_lightred_pokeball;
+      text-decoration: underline $color_lightred;
 
       transition: 500ms ease color;
 
       &:hover {
-        color: $color_lightred_pokeball;
+        color: $color_lightred;
       }
     } 
   }

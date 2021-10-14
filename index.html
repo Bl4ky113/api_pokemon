@@ -13,7 +13,6 @@
   <script src="https://use.fontawesome.com/44b40fa144.js"></script>
   <link rel="stylesheet" href="./src/css/style.css">
   <link rel="page/icon" href="./src/img/pokeball.png" type="image/icon type">
-  <script src="https://unpkg.com/pokeapi-js-wrapper/dist/index.js"></script>
 </head>
 <body>
 <div class="wrapper">
@@ -27,7 +26,53 @@
     </h4>
   </header>
   <main class="main">
-
+    <section class="pokedex">
+      <section class="pokemon-viewer">
+        <div class="wrapper-viewer">
+          <figure class="image">
+            <img src="" alt="test" class="image__img">
+            <figcaption class="image__cap">
+              test
+            </figcaption>
+          </figure>
+          <div class="info">
+            <button class="info__btn info__btn--left"><i class="fa fa-chevron-left" aria-hidden="true"></i></button>
+            <div class="wrapper-info">
+              <div class="info__title">Base Stats</div>
+              <div class="info__label">HP:</div>
+              <div class="info__text">10</div>
+              <div class="info__label">Attack:</div>
+              <div class="info__text">10</div>
+              <div class="info__label">Defence:</div>
+              <div class="info__text">10</div>
+              <div class="info__label">S. Attack:</div>
+              <div class="info__text">10</div>
+              <div class="info__label">S. Defence:</div>
+              <div class="info__text">10</div>
+              <div class="info__label">Speed:</div>
+              <div class="info__text">10</div>
+              <!-- <div class="info__paragraph">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta veritatis ipsum necessitatibus numquam pariatur, porro consectetur magnam quisquam voluptate in excepturi obcaecati saepe consequatur autem sit. Minus aut quidem velit sapiente laboriosam, nisi, voluptas enim soluta, deserunt voluptatum aspernatur corrupti quaerat suscipit earum eaque doloremque nulla ex labore beatae repudiandae.</div> -->
+            </div>
+            <button class="info__btn info__btn--right"><i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+          </div>
+        </div>
+        <div class="separator">
+          <div class="separator__hinge"></div>
+          <div class="separator__hinge"></div>
+        </div>
+      </section>
+      <section class="command-menu">
+        <div class="wrapper-menu">
+          <input type="text" class="menu__search--txt" id="search_txt">
+          <button class="menu__search--btn" id="search_btn"><i class="fa fa-search" aria-hidden="true"></i></button>
+          <div class="pklist">
+            <div class="pk"></div>
+            <div class="pk"></div>
+            <div class="pk"></div>
+          </div>
+        </div>
+      </section>
+    </section>
   </main>
   <footer class="footer">
     <section class="section">

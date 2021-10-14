@@ -57,8 +57,159 @@
 }
 
 .main {
+  background-color: white;
+  padding: 1rem;
+  box-shadow: 2px 10px 10px #aaa;
   grid-area: content;
-  background-color: #FFF;
+  display: grid;
+  align-items: center;
+  justify-items: center;
+}
+.main .pokedex {
+  width: 75%;
+  height: 95vh;
+  display: grid;
+  grid-template: 6vh 1fr/1fr 1fr;
+  grid-template-areas: "viewer clear" "viewer menu ";
+}
+.main .pokedex .pokemon-viewer {
+  border-radius: 1rem 1rem 0 0.5rem;
+  grid-area: viewer;
+  background-color: #dc0023;
+  display: grid;
+  grid-template: 6vh 1fr/1fr 1.5rem;
+  grid-template-areas: "decoration decoration" "w-viewer   separator ";
+}
+.main .pokedex .pokemon-viewer .separator {
+  padding: 1rem 0;
+  box-shadow: inset 0 0 10px -5px;
+  background-color: #be0023;
+  grid-area: separator;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: stretch;
+  justify-content: space-between;
+}
+.main .pokedex .pokemon-viewer .separator .separator__hinge {
+  height: 20%;
+  box-shadow: inset 0 0 10px -5px;
+}
+.main .pokedex .pokemon-viewer .wrapper-viewer {
+  padding: 1rem;
+  border-radius: 0.5rem;
+  margin: 1rem;
+  margin-right: 0.25rem;
+  margin-top: 0;
+  box-shadow: inset 0 0 10px -5px;
+  grid-area: w-viewer;
+  display: grid;
+  grid-template: 1fr 1fr/1fr;
+  grid-template-areas: "image" "info ";
+  align-items: stretch;
+  justify-items: stretch;
+  gap: 0.5rem;
+}
+.main .pokedex .pokemon-viewer .wrapper-viewer .image {
+  grid-area: image;
+  background-color: #be0023;
+}
+.main .pokedex .pokemon-viewer .wrapper-viewer .image .image__img {
+  width: 100%;
+  height: 100%;
+}
+.main .pokedex .pokemon-viewer .wrapper-viewer .info {
+  border-radius: 0.5rem;
+  grid-area: info;
+  background-color: #be0023;
+  display: grid;
+  grid-template: 1fr/2em 1fr 2em;
+  grid-template-areas: "left content right";
+  justify-items: stretch;
+}
+.main .pokedex .pokemon-viewer .wrapper-viewer .info .info__btn {
+  height: 4em;
+  border: none;
+  box-shadow: inset 0 0 4px -1px;
+  background-color: #dc0023;
+  align-self: center;
+  font: 500 0.8em "FontAwesome";
+  color: #000;
+}
+.main .pokedex .pokemon-viewer .wrapper-viewer .info .info__btn--left {
+  content: "";
+  grid-area: left;
+}
+.main .pokedex .pokemon-viewer .wrapper-viewer .info .info__btn--right {
+  content: "";
+  grid-area: right;
+}
+.main .pokedex .pokemon-viewer .wrapper-viewer .info .wrapper-info {
+  padding: 1rem 0.5rem;
+  grid-area: content;
+  display: grid;
+  grid-template: auto/1fr 1fr;
+  grid-auto-rows: 1fr;
+  align-items: center;
+}
+.main .pokedex .pokemon-viewer .wrapper-viewer .info .info__title {
+  padding: 0.25rem 1rem;
+  border-radius: 0.25rem;
+  border-top-right-radius: 0.75rem;
+  grid-column: span 2;
+  grid-row: span 1;
+  align-self: flex-start;
+  background-color: #7e000f;
+  color: #fff;
+  font: 700 1em "Ubuntu", sans-serif;
+  text-transform: capitalize;
+}
+.main .pokedex .pokemon-viewer .wrapper-viewer .info .info__label {
+  border-right: 2px solid #7e000f;
+  border-bottom: 2px solid #7e000f;
+  margin-right: 2rem;
+  grid-column: span 1;
+  grid-row: span 1;
+  color: #fff;
+  font: 600 1em "Ubuntu", sans-serif;
+  text-align: center;
+  text-transform: capitalize;
+}
+.main .pokedex .pokemon-viewer .wrapper-viewer .info .info__text {
+  padding: 0 2em;
+  border-bottom: 2px solid #7e000f;
+  grid-column: span 1;
+  grid-row: span 1;
+  justify-self: center;
+  color: #fff;
+  font: 400 1em "Ubuntu", sans-serif;
+  text-align: center;
+  text-transform: capitalize;
+}
+.main .pokedex .pokemon-viewer .wrapper-viewer .info .info__paragraph {
+  padding: 0 0.25rem;
+  border-left: 2px solid #7e000f;
+  border-right: 2px solid #7e000f;
+  margin: 0.5rem 0;
+  grid-column: span 2;
+  grid-row: span 1;
+  align-self: flex-start;
+  color: #fff;
+  font: 300 0.9em "Ubuntu", sans-serif;
+}
+.main .pokedex .command-menu {
+  padding: 1rem;
+  border-top-right-radius: 1rem;
+  border-bottom-right-radius: 0.5rem;
+  grid-area: menu;
+  background-color: #dc0023;
+  display: grid;
+  grid-template: 1fr/1fr;
+}
+.main .pokedex .command-menu .wrapper-menu {
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  box-shadow: inset 0 0 10px -5px;
+  background-color: #be0023;
 }
 
 .footer {

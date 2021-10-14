@@ -2,7 +2,7 @@
 .header {
   padding: 0.5em;
 
-  background-color: $color_red_pokeball;
+  background-color: $color_red;
 
   grid-area: header;
 
@@ -21,10 +21,10 @@
     padding: 0.15rem 0.25rem;
     
     font: 800 2em "Ubuntu", sans-serif;
-    color: $color_white_pokeball;
+    color: $color_white;
     text-align: center;
     
-    border-bottom: 5px solid $color_darkred_pokeball;
+    border-bottom: 5px solid $color_darkred;
     border-bottom-left-radius: 0.5rem;
     border-bottom-right-radius: 0.5rem;
 
@@ -47,7 +47,7 @@
 
   .header__author {
     font: 400 1.5em "Gemunu Libre", sans-serif;
-    color: $color_darkred_pokeball;
+    color: $color_darkred;
     text-align: center;
     text-decoration: underline;
   }
