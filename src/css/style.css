@@ -104,18 +104,218 @@
   grid-area: w-viewer;
   display: grid;
   grid-template: 1fr 1fr/1fr;
-  grid-template-areas: "image" "info ";
+  grid-template-areas: "pokemon" "info   ";
   align-items: stretch;
   justify-items: stretch;
   gap: 0.5rem;
 }
-.main .pokedex .pokemon-viewer .wrapper-viewer .image {
-  grid-area: image;
+.main .pokedex .pokemon-viewer .wrapper-viewer .view-pokemon {
+  padding: 0.25rem;
+  border-radius: 0.5rem;
+  grid-area: pokemon;
   background-color: #be0023;
+  display: grid;
+  grid-template: auto 1fr auto/1fr;
+  grid-template-areas: "name" "image" "types";
 }
-.main .pokedex .pokemon-viewer .wrapper-viewer .image .image__img {
+.main .pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .pokemon__name {
+  padding: 0 0.5rem;
+  padding-left: 0;
+  border-bottom: 2px solid #7e000f;
+  margin: 0 1rem;
+  grid-area: name;
+  color: white;
+  font: 500 1.5em "Gemunu Libre", sans-serif;
+  text-transform: capitalize;
+  display: flex;
+  align-items: center;
+}
+.main .pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .pokemon__pokeball {
+  width: 1em;
+  height: 1em;
+  margin: 0 0.25rem;
+  margin-left: 0;
+  border-radius: 0.5rem 0.5rem 0 0;
+  padding: 0.25rem;
+  background-color: #7e000f;
+}
+.main .pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .wrapper-img {
+  width: 80%;
+  padding: 0.25rem;
+  border-radius: 0.25rem;
+  margin: 0.25rem;
+  grid-area: image;
+  background-color: #f7f7f7;
+  justify-self: center;
+  display: flex;
+  align-items: stretch;
+  justify-content: stretch;
+}
+.main .pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .pokemon__img {
   width: 100%;
-  height: 100%;
+  height: auto;
+  background-color: transparent;
+  background-image: url("../img/pokeball_blue.png");
+  background-repeat: no-repeat;
+  background-size: auto 100%;
+  background-position: 50%;
+  color: #000;
+  font: 400 1em "Gemunu Libre", sans-serif;
+}
+.main .pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .types-wrapper {
+  grid-area: types;
+  padding: 0.25rem;
+  padding-top: 0;
+  border-bottom: 2px solid #7e000f;
+  margin: 0 1rem;
+  display: grid;
+  grid-template: auto/1fr 1fr 1fr 1fr;
+}
+.main .pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .types-wrapper .pokemon__type {
+  padding: 0 0.5rem;
+  border: 2px solid initial;
+  border-radius: 0.25rem;
+  background-color: initial;
+  color: #fff;
+  font: 500 1em "Ubuntu", sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.main .pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .types-wrapper .pokemon__type .pokemon__type-image {
+  width: 1em;
+  height: 1em;
+  background-color: transparent;
+  background-image: initial;
+  background-repeat: no-repeat;
+  background-size: auto 100%;
+  background-position: 50%;
+}
+.main .pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .types-wrapper .pokemon__type--normal {
+  border-color: #dbdbdb;
+  background-color: #dbdbdb;
+}
+.main .pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .types-wrapper .pokemon__type--normal .pokemon__type-image {
+  background-image: url("../img/types_icons/normal.webp");
+}
+.main .pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .types-wrapper .pokemon__type--fighter {
+  border-color: #d4711f;
+  background-color: #d4711f;
+}
+.main .pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .types-wrapper .pokemon__type--fighter .pokemon__type-image {
+  background-image: url("../img/types_icons/fighting.webp");
+}
+.main .pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .types-wrapper .pokemon__type--flying {
+  border-color: #00aaff;
+  background-color: #00aaff;
+}
+.main .pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .types-wrapper .pokemon__type--flying .pokemon__type-image {
+  background-image: url("../img/types_icons/flying.webp");
+}
+.main .pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .types-wrapper .pokemon__type--poison {
+  border-color: #dd00dd;
+  background-color: #dd00dd;
+}
+.main .pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .types-wrapper .pokemon__type--poison .pokemon__type-image {
+  background-image: url("../img/types_icons/poison.webp");
+}
+.main .pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .types-wrapper .pokemon__type--ground {
+  border-color: #7d5000;
+  background-color: #7d5000;
+}
+.main .pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .types-wrapper .pokemon__type--ground .pokemon__type-image {
+  background-image: url("../img/types_icons/ground.webp");
+}
+.main .pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .types-wrapper .pokemon__type--rock {
+  border-color: #966d38;
+  background-color: #966d38;
+}
+.main .pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .types-wrapper .pokemon__type--rock .pokemon__type-image {
+  background-image: url("../img/types_icons/rock.webp");
+}
+.main .pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .types-wrapper .pokemon__type--bug {
+  border-color: #91c517;
+  background-color: #91c517;
+}
+.main .pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .types-wrapper .pokemon__type--bug .pokemon__type-image {
+  background-image: url("../img/types_icons/bug.webp");
+}
+.main .pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .types-wrapper .pokemon__type--ghost {
+  border-color: #d489ff;
+  background-color: #d489ff;
+}
+.main .pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .types-wrapper .pokemon__type--ghost .pokemon__type-image {
+  background-image: url("../img/types_icons/ghost.webp");
+}
+.main .pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .types-wrapper .pokemon__type--steel {
+  border-color: #a0a0a0;
+  background-color: #a0a0a0;
+}
+.main .pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .types-wrapper .pokemon__type--steel .pokemon__type-image {
+  background-image: url("../img/types_icons/steel.webp");
+}
+.main .pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .types-wrapper .pokemon__type--fire {
+  border-color: #df1e1e;
+  background-color: #df1e1e;
+}
+.main .pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .types-wrapper .pokemon__type--fire .pokemon__type-image {
+  background-image: url("../img/types_icons/fire.webp");
+}
+.main .pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .types-wrapper .pokemon__type--water {
+  border-color: #2e6fe7;
+  background-color: #2e6fe7;
+}
+.main .pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .types-wrapper .pokemon__type--water .pokemon__type-image {
+  background-image: url("../img/types_icons/water.webp");
+}
+.main .pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .types-wrapper .pokemon__type--grass {
+  border-color: #1daf1d;
+  background-color: #1daf1d;
+}
+.main .pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .types-wrapper .pokemon__type--grass .pokemon__type-image {
+  background-image: url("../img/types_icons/grass.webp");
+}
+.main .pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .types-wrapper .pokemon__type--electric {
+  border-color: #d4d404;
+  background-color: #d4d404;
+}
+.main .pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .types-wrapper .pokemon__type--electric .pokemon__type-image {
+  background-image: url("../img/types_icons/electric.webp");
+}
+.main .pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .types-wrapper .pokemon__type--psychic {
+  border-color: #d187b2;
+  background-color: #d187b2;
+}
+.main .pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .types-wrapper .pokemon__type--psychic .pokemon__type-image {
+  background-image: url("../img/types_icons/psychic.webp");
+}
+.main .pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .types-wrapper .pokemon__type--ice {
+  border-color: #5eb3b3;
+  background-color: #5eb3b3;
+}
+.main .pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .types-wrapper .pokemon__type--ice .pokemon__type-image {
+  background-image: url("../img/types_icons/ice.webp");
+}
+.main .pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .types-wrapper .pokemon__type--dragon {
+  border-color: #1a6394;
+  background-color: #1a6394;
+}
+.main .pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .types-wrapper .pokemon__type--dragon .pokemon__type-image {
+  background-image: url("../img/types_icons/dragon.webp");
+}
+.main .pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .types-wrapper .pokemon__type--dark {
+  border-color: #5f5f5f;
+  background-color: #5f5f5f;
+}
+.main .pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .types-wrapper .pokemon__type--dark .pokemon__type-image {
+  background-image: url("../img/types_icons/dark.webp");
+}
+.main .pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .types-wrapper .pokemon__type--fairy {
+  border-color: #df6edf;
+  background-color: #df6edf;
+}
+.main .pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .types-wrapper .pokemon__type--fairy .pokemon__type-image {
+  background-image: url("../img/types_icons/fairy.webp");
 }
 .main .pokedex .pokemon-viewer .wrapper-viewer .info {
   border-radius: 0.5rem;
@@ -160,7 +360,7 @@
   align-self: flex-start;
   background-color: #7e000f;
   color: #fff;
-  font: 700 1em "Ubuntu", sans-serif;
+  font: 400 1.2em "Gemunu Libre", sans-serif;
   text-transform: capitalize;
 }
 .main .pokedex .pokemon-viewer .wrapper-viewer .info .info__label {
@@ -181,7 +381,7 @@
   grid-row: span 1;
   justify-self: center;
   color: #fff;
-  font: 400 1em "Ubuntu", sans-serif;
+  font: 200 1em "Gemunu Libre", sans-serif;
   text-align: center;
   text-transform: capitalize;
 }

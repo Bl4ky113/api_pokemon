@@ -46,6 +46,7 @@ $color_white: rgb(255, 255, 255);
 
   $pokedex_black: #000;
   $pokedex_white: #fff;
+  $pokedex_lightgrey: #f7f7f7;
 
   $size-decoration: 6vh;
 
@@ -103,25 +104,151 @@ $color_white: rgb(255, 255, 255);
 
         display: grid;
         grid-template: 1fr 1fr / 1fr;
-        grid-template-areas: "image" 
-                             "info ";
+        grid-template-areas: "pokemon" 
+                             "info   ";
 
         align-items: stretch;
         justify-items: stretch;
         gap: 0.5rem;
 
-        .image {
-          grid-area: image;
+        .view-pokemon {
+          padding: 0.25rem;
+          border-radius: 0.5rem;
+
+          grid-area: pokemon;
 
           background-color: $pokedex_darkred;
 
-          .image__img {
-            width: 100%; 
-            height: 100%;
+          display: grid; 
+          grid-template: auto 1fr auto / 1fr;
+          grid-template-areas: "name" 
+                               "image"
+                               "types";
+
+          .pokemon__name {
+            padding: 0 0.5rem;
+            padding-left: 0;
+            border-bottom: 2px solid $pokedex_blackred;
+            margin: 0 1rem;
+
+            grid-area: name;
+
+            color: $color_white;
+            font: 500 1.5em "Gemunu Libre", sans-serif;
+            text-transform: capitalize;
+
+            display: flex;
+            align-items: center;
           }
 
-          .image__cap {
+          .pokemon__pokeball {
+            width: 1em;
+            height: 1em;
+
+            margin: 0 0.25rem;
+            margin-left: 0;
+            border-radius: 0.5rem 0.5rem 0 0;
+            padding: 0.25rem;
+
+            background-color: $pokedex_blackred;
+
+          }
+          
+          .wrapper-img {
+            width: 80%;
+
+            padding: 0.25rem;
+            border-radius: 0.25rem;
+            margin: 0.25rem;
+
+            grid-area: image;
             
+            background-color: $pokedex_lightgrey;
+            
+            justify-self: center;
+
+            display: flex;
+            align-items: stretch;
+            justify-content: stretch;
+          }
+          
+          .pokemon__img {
+            width: 100%;
+            height: auto;
+
+            background-color: transparent;
+            background-image: url("../img/pokeball_blue.png");
+            background-repeat: no-repeat;
+            background-size: auto 100%;
+            background-position: 50%;
+
+            color: $pokedex_black;
+            font: 400 1em "Gemunu Libre", sans-serif;
+          }
+          
+          .types-wrapper {
+            grid-area: types;
+
+            padding: 0.25rem;
+            padding-top: 0;
+            border-bottom: 2px solid $pokedex_blackred;
+            margin: 0 1rem;
+
+            display: grid;
+            grid-template: auto / 1fr 1fr 1fr 1fr;
+
+            .pokemon__type {
+              padding: 0 0.5rem;
+              border: 2px solid initial;
+              border-radius: 0.25rem;
+
+              background-color: initial;
+
+              color: $pokedex_white;
+              font: 500 1em "Ubuntu", sans-serif;
+
+              display: flex;
+              align-items: center;
+              justify-content: center;
+
+              .pokemon__type-image {
+                width: 1em;
+                height: 1em;
+
+                background-color: transparent;
+                background-image: initial;
+                background-repeat: no-repeat;
+                background-size: auto 100%;
+                background-position: 50%;
+              }
+            }
+
+            @mixin pokemonsTypes ($color, $type) {
+              border-color: $color;
+              
+              background-color: $color;
+              
+              .pokemon__type-image { background-image: url("../img/types_icons/" + $type + ".webp"); }
+            }
+
+            .pokemon__type--normal { @include pokemonsTypes(rgb(219, 219, 219), "normal"); }
+            .pokemon__type--fighter { @include pokemonsTypes(rgb(212, 113, 31), "fighting"); }
+            .pokemon__type--flying { @include pokemonsTypes(rgb(0, 170, 255), "flying"); }
+            .pokemon__type--poison { @include pokemonsTypes(rgb(221, 0, 221), "poison"); }
+            .pokemon__type--ground { @include pokemonsTypes(rgb(125, 80, 0), "ground"); }
+            .pokemon__type--rock { @include pokemonsTypes(rgb(150, 109, 56), "rock"); }
+            .pokemon__type--bug { @include pokemonsTypes(rgb(145, 197, 23), "bug"); }
+            .pokemon__type--ghost { @include pokemonsTypes(rgb(212, 137, 255), "ghost"); }
+            .pokemon__type--steel { @include pokemonsTypes(rgb(160, 160, 160), "steel"); }
+            .pokemon__type--fire { @include pokemonsTypes(rgb(223, 30, 30), "fire"); }
+            .pokemon__type--water { @include pokemonsTypes(rgb(46, 111, 231), "water"); }
+            .pokemon__type--grass { @include pokemonsTypes(rgb(29, 175, 29), "grass"); }
+            .pokemon__type--electric { @include pokemonsTypes(rgb(212, 212, 4), "electric"); }
+            .pokemon__type--psychic { @include pokemonsTypes(rgb(209, 135, 178), "psychic"); }
+            .pokemon__type--ice { @include pokemonsTypes(rgb(94, 179, 179), "ice"); }
+            .pokemon__type--dragon { @include pokemonsTypes(rgb(26, 99, 148), "dragon"); }
+            .pokemon__type--dark { @include pokemonsTypes(rgb(95, 95, 95), "dark"); }
+            .pokemon__type--fairy { @include pokemonsTypes(rgb(223, 110, 223), "fairy"); }
           }
         }
 
@@ -178,7 +305,7 @@ $color_white: rgb(255, 255, 255);
             background-color: $pokedex_blackred;
 
             color: $pokedex_white;
-            font: 700 1em "Ubuntu", sans-serif;
+            font: 400 1.2em "Gemunu Libre", sans-serif;
             text-transform: capitalize;
           }
 
@@ -205,7 +332,7 @@ $color_white: rgb(255, 255, 255);
             justify-self: center;
 
             color: $pokedex_white;
-            font: 400 1em "Ubuntu", sans-serif;
+            font: 200 1em "Gemunu Libre", sans-serif;
             text-align: center;
             text-transform: capitalize;
           }
