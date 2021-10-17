@@ -125,7 +125,7 @@
   border-bottom: 2px solid #7e000f;
   margin: 0 1rem;
   grid-area: name;
-  color: white;
+  color: #fff;
   font: 500 1.5em "Gemunu Libre", sans-serif;
   text-transform: capitalize;
   display: flex;
@@ -145,8 +145,9 @@
   padding: 0.25rem;
   border-radius: 0.25rem;
   margin: 0.25rem;
+  background-color: #fff;
+  box-shadow: inset 0 0 20px -5px;
   grid-area: image;
-  background-color: #f7f7f7;
   justify-self: center;
   display: flex;
   align-items: stretch;
@@ -534,7 +535,7 @@
 .main .pokedex .command-menu .pklist .pk {
   margin: 0 0.5rem;
   padding: 0.5rem;
-  border: 1px solid #ce2020;
+  border: 1px solid #be0023;
   color: #fff;
   font: 300 1rem "Gemunu Libre", sans-serif;
   text-transform: capitalize;

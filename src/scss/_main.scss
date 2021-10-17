@@ -1,0 +1,15 @@
+.main {
+  
+  background-color: $color_white;
+
+  padding: 1rem;
+  box-shadow: 2px 10px 10px #aaa;
+
+  grid-area: content;
+  
+  display: grid;
+  align-items: center;
+  justify-items: center;
+
+  @import "./_pokedex.scss";
+}
