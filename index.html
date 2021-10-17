@@ -30,11 +30,11 @@
       <section class="pokemon-viewer">
         <div class="wrapper-viewer">
           <div class="view-pokemon">
-            <div class="pokemon__name">
+            <div class="pokemon__name" id="pokemon_name">
               <img src="./src/img/pokeball_red.png" alt="" class="pokemon__pokeball">
             </div>
             <figure class="wrapper-img">
-              <div class="pokemon__img"></div>
+              <div class="pokemon__img" id="pokemon_image"></div>
             </figure>
             <div class="types-wrapper">
 
@@ -42,7 +42,7 @@
           </div>
           <div class="info">
             <button class="info__btn info__btn--left"><i class="fa fa-chevron-left" aria-hidden="true"></i></button>
-            <div class="wrapper-info">
+            <div class="wrapper-info" id="pokemon_info">
 
             </div>
             <button class="info__btn info__btn--right"><i class="fa fa-chevron-right" aria-hidden="true"></i></button>
@@ -55,12 +55,17 @@
       </section>
       <section class="command-menu">
         <div class="wrapper-menu">
-          <input type="text" class="menu__search--txt" id="search_txt">
-          <button class="menu__search--btn" id="search_btn"><i class="fa fa-search" aria-hidden="true"></i></button>
+          <input type="text" class="menu__search menu__search--txt" id="search_txt" placeholder="Pokémon... Pikachu, Charmander">
+          <button class="menu__search menu__search--btn" id="search_btn"></button>
           <div class="pklist">
-            <div class="pk"></div>
-            <div class="pk"></div>
-            <div class="pk"></div>
+            <div class="wrapper-pk" id="pokemon_list">
+              <div class="pk">
+                Normal
+                <div class="pk__type pk__type--normal">
+                  <div class="pk__type-image"></div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>

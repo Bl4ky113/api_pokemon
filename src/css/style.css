@@ -64,6 +64,7 @@
   display: grid;
   align-items: center;
   justify-items: center;
+  /* Pokemon Type's Color */
 }
 .main .pokedex {
   width: 75%;
@@ -165,19 +166,20 @@
 .main .pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .types-wrapper {
   grid-area: types;
   padding: 0.25rem;
-  padding-top: 0;
-  border-bottom: 2px solid #7e000f;
+  border-top: 2px solid #7e000f;
   margin: 0 1rem;
   display: grid;
   grid-template: auto/1fr 1fr 1fr 1fr;
+  gap: 0.5rem;
 }
 .main .pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .types-wrapper .pokemon__type {
-  padding: 0 0.5rem;
+  padding-right: 0.25rem;
   border: 2px solid initial;
   border-radius: 0.25rem;
   background-color: initial;
   color: #fff;
   font: 500 1em "Ubuntu", sans-serif;
+  text-transform: capitalize;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -185,6 +187,7 @@
 .main .pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .types-wrapper .pokemon__type .pokemon__type-image {
   width: 1em;
   height: 1em;
+  margin: 0 0.25rem;
   background-color: transparent;
   background-image: initial;
   background-repeat: no-repeat;
@@ -195,12 +198,18 @@
   border-color: #dbdbdb;
   background-color: #dbdbdb;
 }
+.main .pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .types-wrapper .pokemon__type--normal::after {
+  content: "normal";
+}
 .main .pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .types-wrapper .pokemon__type--normal .pokemon__type-image {
   background-image: url("../img/types_icons/normal.webp");
 }
 .main .pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .types-wrapper .pokemon__type--fighter {
   border-color: #d4711f;
   background-color: #d4711f;
+}
+.main .pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .types-wrapper .pokemon__type--fighter::after {
+  content: "fighting";
 }
 .main .pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .types-wrapper .pokemon__type--fighter .pokemon__type-image {
   background-image: url("../img/types_icons/fighting.webp");
@@ -209,12 +218,18 @@
   border-color: #00aaff;
   background-color: #00aaff;
 }
+.main .pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .types-wrapper .pokemon__type--flying::after {
+  content: "flying";
+}
 .main .pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .types-wrapper .pokemon__type--flying .pokemon__type-image {
   background-image: url("../img/types_icons/flying.webp");
 }
 .main .pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .types-wrapper .pokemon__type--poison {
   border-color: #dd00dd;
   background-color: #dd00dd;
+}
+.main .pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .types-wrapper .pokemon__type--poison::after {
+  content: "poison";
 }
 .main .pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .types-wrapper .pokemon__type--poison .pokemon__type-image {
   background-image: url("../img/types_icons/poison.webp");
@@ -223,12 +238,18 @@
   border-color: #7d5000;
   background-color: #7d5000;
 }
+.main .pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .types-wrapper .pokemon__type--ground::after {
+  content: "ground";
+}
 .main .pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .types-wrapper .pokemon__type--ground .pokemon__type-image {
   background-image: url("../img/types_icons/ground.webp");
 }
 .main .pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .types-wrapper .pokemon__type--rock {
   border-color: #966d38;
   background-color: #966d38;
+}
+.main .pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .types-wrapper .pokemon__type--rock::after {
+  content: "rock";
 }
 .main .pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .types-wrapper .pokemon__type--rock .pokemon__type-image {
   background-image: url("../img/types_icons/rock.webp");
@@ -237,12 +258,18 @@
   border-color: #91c517;
   background-color: #91c517;
 }
+.main .pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .types-wrapper .pokemon__type--bug::after {
+  content: "bug";
+}
 .main .pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .types-wrapper .pokemon__type--bug .pokemon__type-image {
   background-image: url("../img/types_icons/bug.webp");
 }
 .main .pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .types-wrapper .pokemon__type--ghost {
   border-color: #d489ff;
   background-color: #d489ff;
+}
+.main .pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .types-wrapper .pokemon__type--ghost::after {
+  content: "ghost";
 }
 .main .pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .types-wrapper .pokemon__type--ghost .pokemon__type-image {
   background-image: url("../img/types_icons/ghost.webp");
@@ -251,12 +278,18 @@
   border-color: #a0a0a0;
   background-color: #a0a0a0;
 }
+.main .pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .types-wrapper .pokemon__type--steel::after {
+  content: "steel";
+}
 .main .pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .types-wrapper .pokemon__type--steel .pokemon__type-image {
   background-image: url("../img/types_icons/steel.webp");
 }
 .main .pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .types-wrapper .pokemon__type--fire {
   border-color: #df1e1e;
   background-color: #df1e1e;
+}
+.main .pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .types-wrapper .pokemon__type--fire::after {
+  content: "fire";
 }
 .main .pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .types-wrapper .pokemon__type--fire .pokemon__type-image {
   background-image: url("../img/types_icons/fire.webp");
@@ -265,12 +298,18 @@
   border-color: #2e6fe7;
   background-color: #2e6fe7;
 }
+.main .pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .types-wrapper .pokemon__type--water::after {
+  content: "water";
+}
 .main .pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .types-wrapper .pokemon__type--water .pokemon__type-image {
   background-image: url("../img/types_icons/water.webp");
 }
 .main .pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .types-wrapper .pokemon__type--grass {
   border-color: #1daf1d;
   background-color: #1daf1d;
+}
+.main .pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .types-wrapper .pokemon__type--grass::after {
+  content: "grass";
 }
 .main .pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .types-wrapper .pokemon__type--grass .pokemon__type-image {
   background-image: url("../img/types_icons/grass.webp");
@@ -279,12 +318,18 @@
   border-color: #d4d404;
   background-color: #d4d404;
 }
+.main .pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .types-wrapper .pokemon__type--electric::after {
+  content: "electric";
+}
 .main .pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .types-wrapper .pokemon__type--electric .pokemon__type-image {
   background-image: url("../img/types_icons/electric.webp");
 }
 .main .pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .types-wrapper .pokemon__type--psychic {
   border-color: #d187b2;
   background-color: #d187b2;
+}
+.main .pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .types-wrapper .pokemon__type--psychic::after {
+  content: "psychic";
 }
 .main .pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .types-wrapper .pokemon__type--psychic .pokemon__type-image {
   background-image: url("../img/types_icons/psychic.webp");
@@ -293,12 +338,18 @@
   border-color: #5eb3b3;
   background-color: #5eb3b3;
 }
+.main .pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .types-wrapper .pokemon__type--ice::after {
+  content: "ice";
+}
 .main .pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .types-wrapper .pokemon__type--ice .pokemon__type-image {
   background-image: url("../img/types_icons/ice.webp");
 }
 .main .pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .types-wrapper .pokemon__type--dragon {
   border-color: #1a6394;
   background-color: #1a6394;
+}
+.main .pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .types-wrapper .pokemon__type--dragon::after {
+  content: "dragon";
 }
 .main .pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .types-wrapper .pokemon__type--dragon .pokemon__type-image {
   background-image: url("../img/types_icons/dragon.webp");
@@ -307,12 +358,18 @@
   border-color: #5f5f5f;
   background-color: #5f5f5f;
 }
+.main .pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .types-wrapper .pokemon__type--dark::after {
+  content: "dark";
+}
 .main .pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .types-wrapper .pokemon__type--dark .pokemon__type-image {
   background-image: url("../img/types_icons/dark.webp");
 }
 .main .pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .types-wrapper .pokemon__type--fairy {
   border-color: #df6edf;
   background-color: #df6edf;
+}
+.main .pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .types-wrapper .pokemon__type--fairy::after {
+  content: "fairy";
 }
 .main .pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .types-wrapper .pokemon__type--fairy .pokemon__type-image {
   background-image: url("../img/types_icons/fairy.webp");
@@ -334,6 +391,13 @@
   align-self: center;
   font: 500 0.8em "FontAwesome";
   color: #000;
+}
+.main .pokedex .pokemon-viewer .wrapper-viewer .info .info__btn:hover, .main .pokedex .pokemon-viewer .wrapper-viewer .info .info__btn:target {
+  outline: 1px solid #ff0023;
+  cursor: pointer;
+}
+.main .pokedex .pokemon-viewer .wrapper-viewer .info .info__btn:active {
+  box-shadow: inset 0 0 20px -5px #000;
 }
 .main .pokedex .pokemon-viewer .wrapper-viewer .info .info__btn--left {
   content: "";
@@ -406,10 +470,304 @@
   grid-template: 1fr/1fr;
 }
 .main .pokedex .command-menu .wrapper-menu {
-  padding: 0.5rem;
+  padding: 1rem;
   border-radius: 0.5rem;
   box-shadow: inset 0 0 10px -5px;
   background-color: #be0023;
+  display: grid;
+  grid-template: auto 1fr/1fr auto;
+  grid-template-areas: "search btn " "list   list";
+}
+.main .pokedex .command-menu .menu__search {
+  padding: 1rem;
+  border: none;
+  border-radius: 0.25rem;
+  outline: none;
+  margin: 0.25rem;
+  box-shadow: inset 0 0 10px -5px #000;
+  background-color: #7e000f;
+  color: #fff;
+  text-align: center;
+  text-transform: capitalize;
+  font: 400 1.2em "Gemunu Libre", sans-serif;
+}
+.main .pokedex .command-menu .menu__search:hover, .main .pokedex .command-menu .menu__search:target {
+  outline: 1px solid #ff0023;
+  cursor: pointer;
+}
+.main .pokedex .command-menu .menu__search:active {
+  box-shadow: inset 0 0 20px -5px #000;
+}
+.main .pokedex .command-menu .menu__search:hover, .main .pokedex .command-menu .menu__search:target {
+  cursor: text;
+}
+.main .pokedex .command-menu .menu__search--txt {
+  grid-area: search;
+}
+.main .pokedex .command-menu .menu__search--txt::placeholder {
+  color: #be0023;
+  text-decoration: underline solid #be0023;
+}
+.main .pokedex .command-menu .menu__search--btn {
+  grid-area: btn;
+}
+.main .pokedex .command-menu .menu__search--btn::before {
+  content: "";
+  font: 500 1.5em "FontAwesome";
+}
+.main .pokedex .command-menu .pklist {
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  margin: 0.25rem;
+  grid-area: list;
+  background-color: #7e000f;
+  display: grid;
+  align-items: stretch;
+  justify-items: stretch;
+}
+.main .pokedex .command-menu .pklist .wrapper-pk {
+  max-height: 100%;
+  display: grid;
+  grid-template: repeat(12, 1fr)/1fr;
+  align-items: center;
+}
+.main .pokedex .command-menu .pklist .pk {
+  margin: 0 0.5rem;
+  padding: 0.5rem;
+  border: 1px solid #ce2020;
+  color: #fff;
+  font: 300 1rem "Gemunu Libre", sans-serif;
+  text-transform: capitalize;
+  box-shadow: inset 0 0 10px -5px #000;
+  display: grid;
+  grid-template: auto/auto 1fr auto;
+  grid-template-areas: "img_pokeball pkname type-wrapper";
+  align-items: stretch;
+  justify-items: space-around;
+}
+.main .pokedex .command-menu .pklist .pk::before {
+  padding: 0 0.5em;
+  margin: 0 0.5rem;
+  content: "";
+  background-color: transparent;
+  background-image: url("../img/pokeball_red.png");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: 50%;
+}
+.main .pokedex .command-menu .pklist .pk:hover, .main .pokedex .command-menu .pklist .pk:target {
+  outline: 1px solid #ff0023;
+  cursor: pointer;
+}
+.main .pokedex .command-menu .pklist .pk:active {
+  box-shadow: inset 0 0 20px -5px #000;
+}
+.main .pokedex .command-menu .pklist .pk .types-wrapper {
+  grid-area: type-wrapper;
+  display: flex;
+}
+.main .pokedex .command-menu .pklist .pk .pk__type {
+  padding-right: 0.25rem;
+  border: 2px solid initial;
+  border-radius: 0.25rem;
+  margin: 0 0.15rem;
+  background-color: initial;
+  color: #fff;
+  font: 500 0.8em "Ubuntu", sans-serif;
+  text-transform: capitalize;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.main .pokedex .command-menu .pklist .pk .pk__type .pk__type-image {
+  width: 1em;
+  height: 1em;
+  margin: 0 0.25rem;
+  background-color: transparent;
+  background-image: initial;
+  background-repeat: no-repeat;
+  background-size: auto 100%;
+  background-position: 50%;
+}
+.main .pokedex .command-menu .pklist .pk .pk__type--normal {
+  border-color: #dbdbdb;
+  background-color: #dbdbdb;
+}
+.main .pokedex .command-menu .pklist .pk .pk__type--normal::after {
+  content: "normal";
+}
+.main .pokedex .command-menu .pklist .pk .pk__type--normal .pk__type-image {
+  background-image: url("../img/types_icons/normal.webp");
+}
+.main .pokedex .command-menu .pklist .pk .pk__type--fighter {
+  border-color: #d4711f;
+  background-color: #d4711f;
+}
+.main .pokedex .command-menu .pklist .pk .pk__type--fighter::after {
+  content: "fighting";
+}
+.main .pokedex .command-menu .pklist .pk .pk__type--fighter .pk__type-image {
+  background-image: url("../img/types_icons/fighting.webp");
+}
+.main .pokedex .command-menu .pklist .pk .pk__type--flying {
+  border-color: #00aaff;
+  background-color: #00aaff;
+}
+.main .pokedex .command-menu .pklist .pk .pk__type--flying::after {
+  content: "flying";
+}
+.main .pokedex .command-menu .pklist .pk .pk__type--flying .pk__type-image {
+  background-image: url("../img/types_icons/flying.webp");
+}
+.main .pokedex .command-menu .pklist .pk .pk__type--poison {
+  border-color: #dd00dd;
+  background-color: #dd00dd;
+}
+.main .pokedex .command-menu .pklist .pk .pk__type--poison::after {
+  content: "poison";
+}
+.main .pokedex .command-menu .pklist .pk .pk__type--poison .pk__type-image {
+  background-image: url("../img/types_icons/poison.webp");
+}
+.main .pokedex .command-menu .pklist .pk .pk__type--ground {
+  border-color: #7d5000;
+  background-color: #7d5000;
+}
+.main .pokedex .command-menu .pklist .pk .pk__type--ground::after {
+  content: "ground";
+}
+.main .pokedex .command-menu .pklist .pk .pk__type--ground .pk__type-image {
+  background-image: url("../img/types_icons/ground.webp");
+}
+.main .pokedex .command-menu .pklist .pk .pk__type--rock {
+  border-color: #966d38;
+  background-color: #966d38;
+}
+.main .pokedex .command-menu .pklist .pk .pk__type--rock::after {
+  content: "rock";
+}
+.main .pokedex .command-menu .pklist .pk .pk__type--rock .pk__type-image {
+  background-image: url("../img/types_icons/rock.webp");
+}
+.main .pokedex .command-menu .pklist .pk .pk__type--bug {
+  border-color: #91c517;
+  background-color: #91c517;
+}
+.main .pokedex .command-menu .pklist .pk .pk__type--bug::after {
+  content: "bug";
+}
+.main .pokedex .command-menu .pklist .pk .pk__type--bug .pk__type-image {
+  background-image: url("../img/types_icons/bug.webp");
+}
+.main .pokedex .command-menu .pklist .pk .pk__type--ghost {
+  border-color: #d489ff;
+  background-color: #d489ff;
+}
+.main .pokedex .command-menu .pklist .pk .pk__type--ghost::after {
+  content: "ghost";
+}
+.main .pokedex .command-menu .pklist .pk .pk__type--ghost .pk__type-image {
+  background-image: url("../img/types_icons/ghost.webp");
+}
+.main .pokedex .command-menu .pklist .pk .pk__type--steel {
+  border-color: #a0a0a0;
+  background-color: #a0a0a0;
+}
+.main .pokedex .command-menu .pklist .pk .pk__type--steel::after {
+  content: "steel";
+}
+.main .pokedex .command-menu .pklist .pk .pk__type--steel .pk__type-image {
+  background-image: url("../img/types_icons/steel.webp");
+}
+.main .pokedex .command-menu .pklist .pk .pk__type--fire {
+  border-color: #df1e1e;
+  background-color: #df1e1e;
+}
+.main .pokedex .command-menu .pklist .pk .pk__type--fire::after {
+  content: "fire";
+}
+.main .pokedex .command-menu .pklist .pk .pk__type--fire .pk__type-image {
+  background-image: url("../img/types_icons/fire.webp");
+}
+.main .pokedex .command-menu .pklist .pk .pk__type--water {
+  border-color: #2e6fe7;
+  background-color: #2e6fe7;
+}
+.main .pokedex .command-menu .pklist .pk .pk__type--water::after {
+  content: "water";
+}
+.main .pokedex .command-menu .pklist .pk .pk__type--water .pk__type-image {
+  background-image: url("../img/types_icons/water.webp");
+}
+.main .pokedex .command-menu .pklist .pk .pk__type--grass {
+  border-color: #1daf1d;
+  background-color: #1daf1d;
+}
+.main .pokedex .command-menu .pklist .pk .pk__type--grass::after {
+  content: "grass";
+}
+.main .pokedex .command-menu .pklist .pk .pk__type--grass .pk__type-image {
+  background-image: url("../img/types_icons/grass.webp");
+}
+.main .pokedex .command-menu .pklist .pk .pk__type--electric {
+  border-color: #d4d404;
+  background-color: #d4d404;
+}
+.main .pokedex .command-menu .pklist .pk .pk__type--electric::after {
+  content: "electric";
+}
+.main .pokedex .command-menu .pklist .pk .pk__type--electric .pk__type-image {
+  background-image: url("../img/types_icons/electric.webp");
+}
+.main .pokedex .command-menu .pklist .pk .pk__type--psychic {
+  border-color: #d187b2;
+  background-color: #d187b2;
+}
+.main .pokedex .command-menu .pklist .pk .pk__type--psychic::after {
+  content: "psychic";
+}
+.main .pokedex .command-menu .pklist .pk .pk__type--psychic .pk__type-image {
+  background-image: url("../img/types_icons/psychic.webp");
+}
+.main .pokedex .command-menu .pklist .pk .pk__type--ice {
+  border-color: #5eb3b3;
+  background-color: #5eb3b3;
+}
+.main .pokedex .command-menu .pklist .pk .pk__type--ice::after {
+  content: "ice";
+}
+.main .pokedex .command-menu .pklist .pk .pk__type--ice .pk__type-image {
+  background-image: url("../img/types_icons/ice.webp");
+}
+.main .pokedex .command-menu .pklist .pk .pk__type--dragon {
+  border-color: #1a6394;
+  background-color: #1a6394;
+}
+.main .pokedex .command-menu .pklist .pk .pk__type--dragon::after {
+  content: "dragon";
+}
+.main .pokedex .command-menu .pklist .pk .pk__type--dragon .pk__type-image {
+  background-image: url("../img/types_icons/dragon.webp");
+}
+.main .pokedex .command-menu .pklist .pk .pk__type--dark {
+  border-color: #5f5f5f;
+  background-color: #5f5f5f;
+}
+.main .pokedex .command-menu .pklist .pk .pk__type--dark::after {
+  content: "dark";
+}
+.main .pokedex .command-menu .pklist .pk .pk__type--dark .pk__type-image {
+  background-image: url("../img/types_icons/dark.webp");
+}
+.main .pokedex .command-menu .pklist .pk .pk__type--fairy {
+  border-color: #df6edf;
+  background-color: #df6edf;
+}
+.main .pokedex .command-menu .pklist .pk .pk__type--fairy::after {
+  content: "fairy";
+}
+.main .pokedex .command-menu .pklist .pk .pk__type--fairy .pk__type-image {
+  background-image: url("../img/types_icons/fairy.webp");
 }
 
 .footer {
