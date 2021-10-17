@@ -266,14 +266,15 @@ $size-decoration: 6vh;
 
           align-self: center;
 
-          font: 500 0.8em "FontAwesome";
           color: $pokedex_black;
+          font: 500 0.8em "FontAwesome";
+          text-align: center;
 
           @include inputEvents();
         }
 
-        .info__btn--left { content: "\f053"; grid-area: left; }
-        .info__btn--right { content: "\f054"; grid-area: right; }
+        .info__btn--left { grid-area: left; &::before { content: "\f053"; } }
+        .info__btn--right { grid-area: right; &::before { content: "\f054";  } }
 
         .wrapper-info {
           padding: 1rem 0.5rem;
