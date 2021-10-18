@@ -36,6 +36,20 @@ let OUTPUT = {
   pk_list: get.id("pokemon_list")
 }
 
+const searchInObj = (obj, needed_key, parent_key) => {
+  let needed_value = undefined;
+  if (typeof obj === "object") {
+    Object.entries(obj).forEach(([key, value]) => {
+      if (key === needed_key) {
+        needed_value = value;
+      } else if (key === parent_key && typeof value === "object") {
+        needed_value = searchInObj(value, needed_key, parent_key);
+      }
+    });
+  }
+  return needed_value;
+}
+
 const getPokemonData = async (data_url) => {
   try {
     let api_response = await fetch(data_url);
@@ -50,27 +64,29 @@ const getPokemonData = async (data_url) => {
   }
 }
 
-const clearPokemonData = (raw_data, num_obj) => {
-  let main_data = {
-    name: "",
-    id: 0,
-    types: [],
-    img_src: "",
-    general: {
-      color: "",
-      height: 0,
-      weight: 0,
-      game: ""
-    },
-    stats: {
-      hp: 0,
-      attack: 0,
-      defense: 0,
-      special_attack: 0,
-      special_defense: 0,
-      speed: 0
+const clearPokemonData = (raw_data) => {
+  const arr_data = [
+    ["name", "main"], 
+    ["id", "main"], 
+    ["types", "main"], 
+    ["sprites", "main"], 
+    ["height", "main"], 
+    ["weight", "main"], 
+    ["game_indices", "main"], 
+    ["stats", "main"],
+    ["color", "species"],
+    ["flavor_text_entries", "species"]
+  ];
+  let main_data = {};
+
+  arr_data.forEach(([key, parent]) => {
+    if ( !(key in Object.keys(main_data)) ) {
+      value = searchInObj(raw_data, key, parent);
+      main_data[`${key}`] = value;
+      console.log(main_data);
     }
-  };
+  });
+  console.log(main_data, "final");
 }
 
 const showData = (error=false) => {
@@ -91,7 +107,7 @@ INPUT.search.btn.onclick = () => {
     data = getPokemonData(url).then(
       pk => { 
         pokemon_data[`${Object.keys(API_DATA.search.pokemon)[i]}`] = pk;
-        if (Object.values(pokemon_data).length == api_urls.length) {
+        if (Object.values(pokemon_data).length === api_urls.length) {
           pokemon_data = clearPokemonData(pokemon_data);
         }
       }

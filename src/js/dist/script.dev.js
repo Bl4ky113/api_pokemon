@@ -1,5 +1,15 @@
 "use strict";
 
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
 /* Made By Bl4ky113 */
 var API_DATA = {
   url: "https://pokeapi.co/api/v2/",
@@ -32,6 +42,26 @@ var OUTPUT = {
     types: get.id("pokemon_types")
   },
   pk_list: get.id("pokemon_list")
+};
+
+var searchInObj = function searchInObj(obj, needed_key, parent_key) {
+  var needed_value = undefined;
+
+  if (_typeof(obj) === "object") {
+    Object.entries(obj).forEach(function (_ref) {
+      var _ref2 = _slicedToArray(_ref, 2),
+          key = _ref2[0],
+          value = _ref2[1];
+
+      if (key === needed_key) {
+        needed_value = value;
+      } else if (key === parent_key && _typeof(value) === "object") {
+        needed_value = searchInObj(value, needed_key, parent_key);
+      }
+    });
+  }
+
+  return needed_value;
 };
 
 var getPokemonData = function getPokemonData(data_url) {
@@ -71,27 +101,21 @@ var getPokemonData = function getPokemonData(data_url) {
   }, null, null, [[0, 9]]);
 };
 
-var clearPokemonData = function clearPokemonData(raw_data, num_obj) {
-  var main_data = {
-    name: "",
-    id: 0,
-    types: [],
-    img_src: "",
-    general: {
-      color: "",
-      height: 0,
-      weight: 0,
-      game: ""
-    },
-    stats: {
-      hp: 0,
-      attack: 0,
-      defense: 0,
-      special_attack: 0,
-      special_defense: 0,
-      speed: 0
+var clearPokemonData = function clearPokemonData(raw_data) {
+  var arr_data = [["name", "main"], ["id", "main"], ["types", "main"], ["sprites", "main"], ["height", "main"], ["weight", "main"], ["game_indices", "main"], ["stats", "main"], ["color", "species"], ["flavor_text_entries", "species"]];
+  var main_data = {};
+  arr_data.forEach(function (_ref3) {
+    var _ref4 = _slicedToArray(_ref3, 2),
+        key = _ref4[0],
+        parent = _ref4[1];
+
+    if (!(key in Object.keys(main_data))) {
+      value = searchInObj(raw_data, key, parent);
+      main_data["".concat(key)] = value;
+      console.log(main_data);
     }
-  };
+  });
+  console.log(main_data, "final");
 };
 
 var showData = function showData() {
@@ -111,7 +135,7 @@ INPUT.search.btn.onclick = function () {
     data = getPokemonData(url).then(function (pk) {
       pokemon_data["".concat(Object.keys(API_DATA.search.pokemon)[i])] = pk;
 
-      if (Object.values(pokemon_data).length == api_urls.length) {
+      if (Object.values(pokemon_data).length === api_urls.length) {
         pokemon_data = clearPokemonData(pokemon_data);
       }
     });
