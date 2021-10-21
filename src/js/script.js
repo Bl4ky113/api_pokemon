@@ -36,18 +36,38 @@ let OUTPUT = {
   pk_list: get.id("pokemon_list")
 }
 
-const searchInObj = (obj, needed_key, parent_key) => {
+const searchInObj = (obj, needed_key, parent_key, obj_conditional = (obj) => true) => {
   let needed_value = undefined;
+  
   if (typeof obj === "object") {
     Object.entries(obj).forEach(([key, value]) => {
-      if (key === needed_key) {
+      if (key === needed_key && obj_conditional(obj) === true) {
         needed_value = value;
-      } else if (key === parent_key && typeof value === "object") {
-        needed_value = searchInObj(value, needed_key, parent_key);
+      } else if (parent_key.indexOf(key) >= 0 && typeof value === "object") {
+        needed_value = searchInObj(value, needed_key, parent_key, obj_conditional=obj_conditional);
       }
     });
   }
   return needed_value;
+}
+
+const getListDataInObj = (obj, needed_key, parent_key, num_list, conditional = (obj) => true) => {
+  let arr_data = [];
+  
+  for (let i = 0; i < num_list; i += 1) {
+    let data;
+    if (parent_key === "index") {
+      data = searchInObj(obj, needed_key, `${i}`, obj_conditional=conditional);
+    } else {
+      data = searchInObj(obj[i], needed_key, parent_key, obj_conditional=conditional);
+    }
+
+    if (data != undefined) {
+      arr_data.push(data);
+    }
+  }
+
+  return arr_data;
 }
 
 const getPokemonData = async (data_url) => {
@@ -65,28 +85,59 @@ const getPokemonData = async (data_url) => {
 }
 
 const clearPokemonData = (raw_data) => {
+  const data_final_keys = [
+    "name",
+    "id",
+    "types",
+    "sprite",
+    "height",
+    "weight",
+    "game",
+    "stats",
+    "color",
+    "description"
+  ];
   const arr_data = [
-    ["name", "main"], 
-    ["id", "main"], 
-    ["types", "main"], 
-    ["sprites", "main"], 
-    ["height", "main"], 
-    ["weight", "main"], 
-    ["game_indices", "main"], 
-    ["stats", "main"],
-    ["color", "species"],
-    ["flavor_text_entries", "species"]
+    ["name", ["main"]],
+    ["id", ["main"]],
+    ["types", ["main"]], 
+    ["front_default", ["main", "sprites"]], 
+    ["height", ["main"]],
+    ["weight", ["main"]],
+    ["version", ["main", "game_indices", "0"]],
+    ["stats", ["main"]],
+    ["color", ["species"]],
+    ["flavor_text_entries", ["species"]]
   ];
   let main_data = {};
 
-  arr_data.forEach(([key, parent]) => {
+  arr_data.forEach(([key, parent], i) => {
     if ( !(key in Object.keys(main_data)) ) {
-      value = searchInObj(raw_data, key, parent);
-      main_data[`${key}`] = value;
-      console.log(main_data);
+      let value = searchInObj(raw_data, key, parent);
+      main_data[`${data_final_keys[i]}`] = value;
     }
   });
-  console.log(main_data, "final");
+  
+  main_data.types = getListDataInObj(main_data.types, "name", "type", main_data.types.length);
+
+  const stats_names = getListDataInObj(main_data.stats, "name", "stat", main_data.stats.length);
+  const stats_values = getListDataInObj(main_data.stats, "base_stat", "index", main_data.stats.length);
+
+  main_data.stats = {};
+  stats_names.forEach((name, i) => {
+    main_data.stats[`${name}`] = stats_values[i];
+  });
+
+  main_data.game = searchInObj(main_data.game, "name", "version");
+  main_data.color = searchInObj(main_data.color, "name", "color");
+
+  main_data.description = getListDataInObj(main_data.description, "flavor_text", "index", main_data.description.length, 
+  (obj) => {
+    try { if (obj.language.name === "en") { return true; } else { return false; } } 
+      catch { return false; }
+  });
+
+  console.log(main_data)
 }
 
 const showData = (error=false) => {

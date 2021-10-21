@@ -45,6 +45,9 @@ var OUTPUT = {
 };
 
 var searchInObj = function searchInObj(obj, needed_key, parent_key) {
+  var obj_conditional = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : function (obj) {
+    return true;
+  };
   var needed_value = undefined;
 
   if (_typeof(obj) === "object") {
@@ -53,15 +56,38 @@ var searchInObj = function searchInObj(obj, needed_key, parent_key) {
           key = _ref2[0],
           value = _ref2[1];
 
-      if (key === needed_key) {
+      if (key === needed_key && obj_conditional(obj) === true) {
         needed_value = value;
-      } else if (key === parent_key && _typeof(value) === "object") {
-        needed_value = searchInObj(value, needed_key, parent_key);
+      } else if (parent_key.indexOf(key) >= 0 && _typeof(value) === "object") {
+        needed_value = searchInObj(value, needed_key, parent_key, obj_conditional = obj_conditional);
       }
     });
   }
 
   return needed_value;
+};
+
+var getListDataInObj = function getListDataInObj(obj, needed_key, parent_key, num_list) {
+  var conditional = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : function (obj) {
+    return true;
+  };
+  var arr_data = [];
+
+  for (var i = 0; i < num_list; i += 1) {
+    var _data = void 0;
+
+    if (parent_key === "index") {
+      _data = searchInObj(obj, needed_key, "".concat(i), obj_conditional = conditional);
+    } else {
+      _data = searchInObj(obj[i], needed_key, parent_key, obj_conditional = conditional);
+    }
+
+    if (_data != undefined) {
+      arr_data.push(_data);
+    }
+  }
+
+  return arr_data;
 };
 
 var getPokemonData = function getPokemonData(data_url) {
@@ -102,20 +128,40 @@ var getPokemonData = function getPokemonData(data_url) {
 };
 
 var clearPokemonData = function clearPokemonData(raw_data) {
-  var arr_data = [["name", "main"], ["id", "main"], ["types", "main"], ["sprites", "main"], ["height", "main"], ["weight", "main"], ["game_indices", "main"], ["stats", "main"], ["color", "species"], ["flavor_text_entries", "species"]];
+  var data_final_keys = ["name", "id", "types", "sprite", "height", "weight", "game", "stats", "color", "description"];
+  var arr_data = [["name", ["main"]], ["id", ["main"]], ["types", ["main"]], ["front_default", ["main", "sprites"]], ["height", ["main"]], ["weight", ["main"]], ["version", ["main", "game_indices", "0"]], ["stats", ["main"]], ["color", ["species"]], ["flavor_text_entries", ["species"]]];
   var main_data = {};
-  arr_data.forEach(function (_ref3) {
+  arr_data.forEach(function (_ref3, i) {
     var _ref4 = _slicedToArray(_ref3, 2),
         key = _ref4[0],
         parent = _ref4[1];
 
     if (!(key in Object.keys(main_data))) {
-      value = searchInObj(raw_data, key, parent);
-      main_data["".concat(key)] = value;
-      console.log(main_data);
+      var value = searchInObj(raw_data, key, parent);
+      main_data["".concat(data_final_keys[i])] = value;
     }
   });
-  console.log(main_data, "final");
+  main_data.types = getListDataInObj(main_data.types, "name", "type", main_data.types.length);
+  var stats_names = getListDataInObj(main_data.stats, "name", "stat", main_data.stats.length);
+  var stats_values = getListDataInObj(main_data.stats, "base_stat", "index", main_data.stats.length);
+  main_data.stats = {};
+  stats_names.forEach(function (name, i) {
+    main_data.stats["".concat(name)] = stats_values[i];
+  });
+  main_data.game = searchInObj(main_data.game, "name", "version");
+  main_data.color = searchInObj(main_data.color, "name", "color");
+  main_data.description = getListDataInObj(main_data.description, "flavor_text", "index", main_data.description.length, function (obj) {
+    try {
+      if (obj.language.name === "en") {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (_unused) {
+      return false;
+    }
+  });
+  console.log(main_data);
 };
 
 var showData = function showData() {
