@@ -39,9 +39,21 @@ var OUTPUT = {
   pokemon: {
     name: get.id("pokemon_name"),
     img: get.id("pokemon_image"),
-    types: get.id("pokemon_types")
+    types: get.id("pokemon_types"),
+    info: get.id("pokemon_info")
   },
   pk_list: get.id("pokemon_list")
+};
+var menuInfo = [];
+var menuInfo_index = 0;
+
+var clearString = function clearString(string) {
+  var list_unicode = [/\n/g, /\f/g];
+  var cleanStr = string;
+  list_unicode.forEach(function (_char) {
+    cleanStr = cleanStr.replaceAll(_char, " ");
+  });
+  return cleanStr;
 };
 
 var searchInObj = function searchInObj(obj, needed_key, parent_key) {
@@ -117,7 +129,7 @@ var getPokemonData = function getPokemonData(data_url) {
           _context.prev = 9;
           _context.t0 = _context["catch"](0);
           console.error(_context.t0);
-          showData(error = true);
+          showData(data = {}, error = true);
 
         case 13:
         case "end":
@@ -128,17 +140,17 @@ var getPokemonData = function getPokemonData(data_url) {
 };
 
 var clearPokemonData = function clearPokemonData(raw_data) {
-  var data_final_keys = ["name", "id", "types", "sprite", "height", "weight", "game", "stats", "color", "description"];
-  var arr_data = [["name", ["main"]], ["id", ["main"]], ["types", ["main"]], ["front_default", ["main", "sprites"]], ["height", ["main"]], ["weight", ["main"]], ["version", ["main", "game_indices", "0"]], ["stats", ["main"]], ["color", ["species"]], ["flavor_text_entries", ["species"]]];
+  var arr_data = [["name", "name", ["main"]], ["id", "id", ["main"]], ["types", "types", ["main"]], ["sprite", "front_default", ["main", "sprites"]], ["height", "height", ["main"]], ["weight", "weight", ["main"]], ["game", "version", ["main", "game_indices", "0"]], ["stats", "stats", ["main"]], ["color", "color", ["species"]], ["descriptions", "flavor_text_entries", ["species"]]];
   var main_data = {};
-  arr_data.forEach(function (_ref3, i) {
-    var _ref4 = _slicedToArray(_ref3, 2),
-        key = _ref4[0],
-        parent = _ref4[1];
+  arr_data.forEach(function (_ref3) {
+    var _ref4 = _slicedToArray(_ref3, 3),
+        name = _ref4[0],
+        key = _ref4[1],
+        parent = _ref4[2];
 
     if (!(key in Object.keys(main_data))) {
       var value = searchInObj(raw_data, key, parent);
-      main_data["".concat(data_final_keys[i])] = value;
+      main_data["".concat(name)] = value;
     }
   });
   main_data.types = getListDataInObj(main_data.types, "name", "type", main_data.types.length);
@@ -146,11 +158,15 @@ var clearPokemonData = function clearPokemonData(raw_data) {
   var stats_values = getListDataInObj(main_data.stats, "base_stat", "index", main_data.stats.length);
   main_data.stats = {};
   stats_names.forEach(function (name, i) {
+    if (name.includes("special-") === true) {
+      name = name.replaceAll("special-", "S. ");
+    }
+
     main_data.stats["".concat(name)] = stats_values[i];
   });
   main_data.game = searchInObj(main_data.game, "name", "version");
   main_data.color = searchInObj(main_data.color, "name", "color");
-  main_data.description = getListDataInObj(main_data.description, "flavor_text", "index", main_data.description.length, function (obj) {
+  main_data.descriptions = getListDataInObj(main_data.descriptions, "flavor_text", "index", main_data.descriptions.length, function (obj) {
     try {
       if (obj.language.name === "en") {
         return true;
@@ -161,18 +177,96 @@ var clearPokemonData = function clearPokemonData(raw_data) {
       return false;
     }
   });
-  console.log(main_data);
+  main_data.descriptions.forEach(function (str, i) {
+    main_data.descriptions[i] = clearString(str);
+  });
+  return main_data;
 };
 
 var showData = function showData() {
-  var error = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
-  console.log("show error");
+  var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var error = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+  var pokeball_img = "<img src=\"./src/img/pokeball_red.png\" alt=\"\" class=\"pokemon__pokeball\">";
+
+  if (error != true) {
+    OUTPUT.pokemon.img.style = "background-image: url(".concat(data.sprite, ")");
+    OUTPUT.pokemon.name.innerHTML = pokeball_img + "".concat(data.name);
+    OUTPUT.pokemon.types.innerHTML = "";
+    data.types.forEach(function (type_name) {
+      var type_HTML = "\n      <div class=\"pokemon__type pokemon__type--".concat(type_name, "\">\n        <div class=\"pokemon__type-image\"></div>\n      </div>\n      ");
+      OUTPUT.pokemon.types.innerHTML += type_HTML;
+    });
+    menuInfo = createMenuInfo(data);
+    changeMenuInfo();
+  } else {
+    OUTPUT.pokemon.img.style = "background-image: url('./src/img/pokeball_red.png')";
+    OUTPUT.pokemon.name.innerHTML = pokeball_img;
+    OUTPUT.pokemon.types.innerHTML = "<div class=\"pokemon__type\"><div class=\"pokemon__type-image\"></div></div>";
+    OUTPUT.pokemon.info.innerHTML = "";
+  }
+};
+
+var createMenuInfo = function createMenuInfo(menu_data) {
+  var arr_info = [];
+  var HTML_info = "";
+  var needed_char = ["color", "game", "height", "id", "weight"];
+  HTML_info += "<div class='info__title'>Base Stats</div>";
+  Object.entries(menu_data.stats).forEach(function (_ref5) {
+    var _ref6 = _slicedToArray(_ref5, 2),
+        key = _ref6[0],
+        val = _ref6[1];
+
+    HTML_info += "<div class='info__label'>".concat(key, "</div>");
+    HTML_info += "<div class='info__text'>".concat(val, "</div>");
+  });
+  arr_info.push(HTML_info);
+  HTML_info = "";
+  HTML_info += "<div class='info__title'>Characteristics</div>";
+  Object.entries(menu_data).forEach(function (_ref7) {
+    var _ref8 = _slicedToArray(_ref7, 2),
+        key = _ref8[0],
+        val = _ref8[1];
+
+    if (needed_char.indexOf(key) >= 0) {
+      HTML_info += "<div class='info__label'>".concat(key, "</div>");
+      HTML_info += "<div class='info__text'>".concat(val, "</div>");
+    }
+  });
+  arr_info.push(HTML_info);
+  HTML_info = "";
+  HTML_info += "<div class='info__title'>Description</div>";
+  HTML_info += "<div class='info__paragraph'>".concat(menu_data.descriptions[Math.floor(Math.random() * menu_data.descriptions.length)], "</div>");
+  arr_info.push(HTML_info);
+  return arr_info;
+};
+
+var changeMenuInfo = function changeMenuInfo() {
+  var element = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : Boolean;
+
+  if (menuInfo.length > 0) {
+    if (element === true && menuInfo_index !== menuInfo.length - 1) {
+      menuInfo_index += 1;
+    } else if (element === false && menuInfo_index !== 0) {
+      menuInfo_index -= 1;
+    }
+
+    OUTPUT.pokemon.info.innerHTML = menuInfo[menuInfo_index];
+  }
+};
+
+INPUT.info.r.onclick = function () {
+  return changeMenuInfo(true);
+};
+
+INPUT.info.l.onclick = function () {
+  return changeMenuInfo(false);
 };
 
 INPUT.search.btn.onclick = function () {
   var pokemon = INPUT.search.text.value.toLowerCase();
   var api_urls = [];
   var pokemon_data = {};
+  menuInfo = [];
   Object.values(API_DATA.search.pokemon).forEach(function (search_type) {
     var url = "".concat(API_DATA.url).concat(search_type).concat(pokemon);
     api_urls.push(url);
@@ -183,7 +277,10 @@ INPUT.search.btn.onclick = function () {
 
       if (Object.values(pokemon_data).length === api_urls.length) {
         pokemon_data = clearPokemonData(pokemon_data);
+        showData(pokemon_data);
       }
+    })["catch"](function (e) {
+      return console.log(e);
     });
   });
 };
