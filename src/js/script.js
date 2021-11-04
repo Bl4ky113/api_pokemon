@@ -24,7 +24,7 @@ let INPUT = {
     r: get.id("info_r-btn"),
     l: get.id("info_l-btn")
   },
-  // Pk list objs as well, but those are DOM generated
+  pk_list: get.id("pokemon_list")
 }
 
 let OUTPUT = {
@@ -37,8 +37,11 @@ let OUTPUT = {
   pk_list: get.id("pokemon_list")
 }
 
-var menuInfo = [];
-var menuInfo_index = 0;
+const NUM_PK_LIST_OBJ = 12;
+
+let menuInfo = [];
+let menuInfo_index = 0;
+let listInfo = [];
 
 const clearString = (string) => {
   let list_unicode = [/\n/g, /\f/g];
@@ -91,11 +94,37 @@ const getPokemonData = async (data_url) => {
 
     if (!api_response.ok) { throw new Error(`Conection Errror: ${api_response.status}`) }
 
-    return  api_response.json();
+    return api_response.json();
 
   } catch (e) {
     console.error(e);
     showData(data={}, error=true);
+  }
+}
+
+const getListData = async (main_data_url) => {
+  try {
+    let pokemon_list_url = [];
+    OUTPUT.pk_list.innerHTML = "";
+
+    getPokemonData(main_data_url)
+      .then(pk => {
+        for (let id = pk.id; id < (pk.id + NUM_PK_LIST_OBJ); id += 1) {
+          pokemon_list_url.push(`${API_DATA.url}${API_DATA.search.pokemon.main}${id}`);
+        }
+
+        pokemon_list_url.forEach(url => {
+          getPokemonData(url)
+            .then(pk => {
+              list_data = clearListData(pk);
+
+              showListData(data=list_data);
+            }).catch(e => console.error(e));
+        });
+      }).catch(e => console.error(e));
+  } catch (e) {
+    console.error(e);
+    showListData(list=[], error=true);
   }
 }
 
@@ -148,6 +177,26 @@ const clearPokemonData = (raw_data) => {
   return main_data;
 }
 
+const clearListData = (raw_data) => {
+  const arr_data = [
+    ["name", "name", ["main"]],
+    ["id", "id", ["main"]],
+    ["types", "types", ["main"]]
+  ];
+  let main_data = {};
+
+  arr_data.forEach(([name, key, parent]) => {
+    if ( !(key in Object.keys(main_data)) ) {
+      let value = searchInObj(raw_data, key, parent);
+      main_data[`${name}`] = value;
+    }
+  });
+
+  main_data.types = getListDataInObj(main_data.types, "name", "type", main_data.types.length);
+
+  return main_data;
+}
+
 const showData = (data={}, error=false) => {
   const pokeball_img = `<img src="./src/img/pokeball_red.png" alt="" class="pokemon__pokeball">`;
 
@@ -174,6 +223,33 @@ const showData = (data={}, error=false) => {
     OUTPUT.pokemon.name.innerHTML = pokeball_img;
     OUTPUT.pokemon.types.innerHTML = `<div class="pokemon__type"><div class="pokemon__type-image"></div></div>`;
     OUTPUT.pokemon.info.innerHTML = "";
+  }
+}
+
+const showListData = (data={}, error=false) => {
+  if (error != true) {
+    let type_HTML = "";
+    data.types.forEach(type_name => {
+      type_HTML += `
+        <div class="pk__type pk__type--${type_name}">
+          <div class="pk__type-image"></div>
+        </div>
+      `;
+    });
+
+    let HTML_OBJ = `
+    <div class="pk">
+      ${data.name}
+      <div class="types-wrapper"> 
+        ${type_HTML}
+      </div>
+    </div>
+    `;
+
+    OUTPUT.pk_list.innerHTML += HTML_OBJ;
+
+  } else {
+    OUTPUT.pk_list.innerHTML = "";
   }
 }
 
@@ -223,6 +299,7 @@ INPUT.search.btn.onclick = () => {
   let pokemon = INPUT.search.text.value.toLowerCase();
   let api_urls = [];
   let pokemon_data = {};
+  listInfo = [];
   menuInfo = [];
   
   Object.values(API_DATA.search.pokemon).forEach(search_type => {
@@ -231,14 +308,14 @@ INPUT.search.btn.onclick = () => {
   });
 
   api_urls.forEach((url, i) => {
-    data = getPokemonData(url).then(
-      pk => { 
-        pokemon_data[`${Object.keys(API_DATA.search.pokemon)[i]}`] = pk;
-        if (Object.values(pokemon_data).length === api_urls.length) {
-          pokemon_data = clearPokemonData(pokemon_data);
-          showData(pokemon_data);
-        }
-      }
-    ).catch (e => console.log(e));
+    getPokemonData(url)
+      .then( pk => { 
+          pokemon_data[`${Object.keys(API_DATA.search.pokemon)[i]}`] = pk;
+          if (Object.values(pokemon_data).length === api_urls.length) {
+            pokemon_data = clearPokemonData(pokemon_data);
+            showData(pokemon_data);
+          }
+      }).catch (e => console.log(e));
   });
+  getListData(api_urls[0], pokemon_data);
 }

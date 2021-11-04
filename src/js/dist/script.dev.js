@@ -32,8 +32,8 @@ var INPUT = {
   info: {
     r: get.id("info_r-btn"),
     l: get.id("info_l-btn")
-  } // Pk list objs as well, but those are DOM generated
-
+  },
+  pk_list: get.id("pokemon_list")
 };
 var OUTPUT = {
   pokemon: {
@@ -44,8 +44,10 @@ var OUTPUT = {
   },
   pk_list: get.id("pokemon_list")
 };
+var NUM_PK_LIST_OBJ = 12;
 var menuInfo = [];
 var menuInfo_index = 0;
+var listInfo = [];
 
 var clearString = function clearString(string) {
   var list_unicode = [/\n/g, /\f/g];
@@ -139,6 +141,44 @@ var getPokemonData = function getPokemonData(data_url) {
   }, null, null, [[0, 9]]);
 };
 
+var getListData = function getListData(main_data_url) {
+  var pokemon_list_url;
+  return regeneratorRuntime.async(function getListData$(_context2) {
+    while (1) {
+      switch (_context2.prev = _context2.next) {
+        case 0:
+          try {
+            pokemon_list_url = [];
+            OUTPUT.pk_list.innerHTML = "";
+            getPokemonData(main_data_url).then(function (pk) {
+              for (var id = pk.id; id < pk.id + NUM_PK_LIST_OBJ; id += 1) {
+                pokemon_list_url.push("".concat(API_DATA.url).concat(API_DATA.search.pokemon.main).concat(id));
+              }
+
+              pokemon_list_url.forEach(function (url) {
+                getPokemonData(url).then(function (pk) {
+                  list_data = clearListData(pk);
+                  showListData(data = list_data);
+                })["catch"](function (e) {
+                  return console.error(e);
+                });
+              });
+            })["catch"](function (e) {
+              return console.error(e);
+            });
+          } catch (e) {
+            console.error(e);
+            showListData(list = [], error = true);
+          }
+
+        case 1:
+        case "end":
+          return _context2.stop();
+      }
+    }
+  });
+};
+
 var clearPokemonData = function clearPokemonData(raw_data) {
   var arr_data = [["name", "name", ["main"]], ["id", "id", ["main"]], ["types", "types", ["main"]], ["sprite", "front_default", ["main", "sprites"]], ["height", "height", ["main"]], ["weight", "weight", ["main"]], ["game", "version", ["main", "game_indices", "0"]], ["stats", "stats", ["main"]], ["color", "color", ["species"]], ["descriptions", "flavor_text_entries", ["species"]]];
   var main_data = {};
@@ -183,6 +223,24 @@ var clearPokemonData = function clearPokemonData(raw_data) {
   return main_data;
 };
 
+var clearListData = function clearListData(raw_data) {
+  var arr_data = [["name", "name", ["main"]], ["id", "id", ["main"]], ["types", "types", ["main"]]];
+  var main_data = {};
+  arr_data.forEach(function (_ref5) {
+    var _ref6 = _slicedToArray(_ref5, 3),
+        name = _ref6[0],
+        key = _ref6[1],
+        parent = _ref6[2];
+
+    if (!(key in Object.keys(main_data))) {
+      var value = searchInObj(raw_data, key, parent);
+      main_data["".concat(name)] = value;
+    }
+  });
+  main_data.types = getListDataInObj(main_data.types, "name", "type", main_data.types.length);
+  return main_data;
+};
+
 var showData = function showData() {
   var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var error = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
@@ -206,15 +264,31 @@ var showData = function showData() {
   }
 };
 
+var showListData = function showListData() {
+  var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var error = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+
+  if (error != true) {
+    var type_HTML = "";
+    data.types.forEach(function (type_name) {
+      type_HTML += "\n        <div class=\"pk__type pk__type--".concat(type_name, "\">\n          <div class=\"pk__type-image\"></div>\n        </div>\n      ");
+    });
+    var HTML_OBJ = "\n    <div class=\"pk\">\n      ".concat(data.name, "\n      <div class=\"types-wrapper\"> \n        ").concat(type_HTML, "\n      </div>\n    </div>\n    ");
+    OUTPUT.pk_list.innerHTML += HTML_OBJ;
+  } else {
+    OUTPUT.pk_list.innerHTML = "";
+  }
+};
+
 var createMenuInfo = function createMenuInfo(menu_data) {
   var arr_info = [];
   var HTML_info = "";
   var needed_char = ["color", "game", "height", "id", "weight"];
   HTML_info += "<div class='info__title'>Base Stats</div>";
-  Object.entries(menu_data.stats).forEach(function (_ref5) {
-    var _ref6 = _slicedToArray(_ref5, 2),
-        key = _ref6[0],
-        val = _ref6[1];
+  Object.entries(menu_data.stats).forEach(function (_ref7) {
+    var _ref8 = _slicedToArray(_ref7, 2),
+        key = _ref8[0],
+        val = _ref8[1];
 
     HTML_info += "<div class='info__label'>".concat(key, "</div>");
     HTML_info += "<div class='info__text'>".concat(val, "</div>");
@@ -222,10 +296,10 @@ var createMenuInfo = function createMenuInfo(menu_data) {
   arr_info.push(HTML_info);
   HTML_info = "";
   HTML_info += "<div class='info__title'>Characteristics</div>";
-  Object.entries(menu_data).forEach(function (_ref7) {
-    var _ref8 = _slicedToArray(_ref7, 2),
-        key = _ref8[0],
-        val = _ref8[1];
+  Object.entries(menu_data).forEach(function (_ref9) {
+    var _ref10 = _slicedToArray(_ref9, 2),
+        key = _ref10[0],
+        val = _ref10[1];
 
     if (needed_char.indexOf(key) >= 0) {
       HTML_info += "<div class='info__label'>".concat(key, "</div>");
@@ -266,13 +340,14 @@ INPUT.search.btn.onclick = function () {
   var pokemon = INPUT.search.text.value.toLowerCase();
   var api_urls = [];
   var pokemon_data = {};
+  listInfo = [];
   menuInfo = [];
   Object.values(API_DATA.search.pokemon).forEach(function (search_type) {
     var url = "".concat(API_DATA.url).concat(search_type).concat(pokemon);
     api_urls.push(url);
   });
   api_urls.forEach(function (url, i) {
-    data = getPokemonData(url).then(function (pk) {
+    getPokemonData(url).then(function (pk) {
       pokemon_data["".concat(Object.keys(API_DATA.search.pokemon)[i])] = pk;
 
       if (Object.values(pokemon_data).length === api_urls.length) {
@@ -283,4 +358,5 @@ INPUT.search.btn.onclick = function () {
       return console.log(e);
     });
   });
+  getListData(api_urls[0], pokemon_data);
 };
