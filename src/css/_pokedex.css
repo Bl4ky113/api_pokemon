@@ -139,14 +139,14 @@
 .pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .types-wrapper .pokemon__type--normal .pokemon__type-image {
   background-image: url("../img/types_icons/normal.webp");
 }
-.pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .types-wrapper .pokemon__type--fighter {
+.pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .types-wrapper .pokemon__type--fighting {
   border-color: #d4711f;
   background-color: #d4711f;
 }
-.pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .types-wrapper .pokemon__type--fighter::after {
+.pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .types-wrapper .pokemon__type--fighting::after {
   content: "fighting";
 }
-.pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .types-wrapper .pokemon__type--fighter .pokemon__type-image {
+.pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .types-wrapper .pokemon__type--fighting .pokemon__type-image {
   background-image: url("../img/types_icons/fighting.webp");
 }
 .pokedex .pokemon-viewer .wrapper-viewer .view-pokemon .types-wrapper .pokemon__type--flying {
@@ -540,14 +540,14 @@
 .pokedex .command-menu .pklist .pk .pk__type--normal .pk__type-image {
   background-image: url("../img/types_icons/normal.webp");
 }
-.pokedex .command-menu .pklist .pk .pk__type--fighter {
+.pokedex .command-menu .pklist .pk .pk__type--fighting {
   border-color: #d4711f;
   background-color: #d4711f;
 }
-.pokedex .command-menu .pklist .pk .pk__type--fighter::after {
+.pokedex .command-menu .pklist .pk .pk__type--fighting::after {
   content: "fighting";
 }
-.pokedex .command-menu .pklist .pk .pk__type--fighter .pk__type-image {
+.pokedex .command-menu .pklist .pk .pk__type--fighting .pk__type-image {
   background-image: url("../img/types_icons/fighting.webp");
 }
 .pokedex .command-menu .pklist .pk .pk__type--flying {

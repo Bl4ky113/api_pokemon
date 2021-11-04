@@ -336,6 +336,33 @@ INPUT.info.l.onclick = function () {
   return changeMenuInfo(false);
 };
 
+INPUT.pk_list.onclick = function (e) {
+  if (e.target.className === "pk") {
+    var pokemon = e.target.innerText.toLowerCase();
+    var api_urls = [];
+    var pokemon_data = {};
+    listInfo = [];
+    menuInfo = [];
+    Object.values(API_DATA.search.pokemon).forEach(function (search_type) {
+      var url = "".concat(API_DATA.url).concat(search_type).concat(pokemon);
+      api_urls.push(url);
+    });
+    api_urls.forEach(function (url, i) {
+      getPokemonData(url).then(function (pk) {
+        pokemon_data["".concat(Object.keys(API_DATA.search.pokemon)[i])] = pk;
+
+        if (Object.values(pokemon_data).length === api_urls.length) {
+          pokemon_data = clearPokemonData(pokemon_data);
+          showData(pokemon_data);
+        }
+      })["catch"](function (e) {
+        return console.log(e);
+      });
+    });
+    getListData(api_urls[0], pokemon_data);
+  }
+};
+
 INPUT.search.btn.onclick = function () {
   var pokemon = INPUT.search.text.value.toLowerCase();
   var api_urls = [];

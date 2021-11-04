@@ -223,7 +223,7 @@ $size-decoration: 6vh;
           $image_class: pokemon__type-image;
 
           .pokemon__type--normal { @include pokemonsTypes($type_normal, "normal", $image_class); }
-          .pokemon__type--fighter { @include pokemonsTypes($type_fighter, "fighting", $image_class); }
+          .pokemon__type--fighting { @include pokemonsTypes($type_fighter, "fighting", $image_class); }
           .pokemon__type--flying { @include pokemonsTypes($type_flying, "flying", $image_class); }
           .pokemon__type--poison { @include pokemonsTypes($type_poison, "poison", $image_class); }
           .pokemon__type--ground { @include pokemonsTypes($type_ground, "ground", $image_class); }
@@ -508,7 +508,7 @@ $size-decoration: 6vh;
         $image_class: pk__type-image;
 
         .pk__type--normal { @include pokemonsTypes($type_normal, "normal", $image_class)}
-        .pk__type--fighter { @include pokemonsTypes($type_fighter, "fighting", $image_class)}
+        .pk__type--fighting { @include pokemonsTypes($type_fighter, "fighting", $image_class)}
         .pk__type--flying { @include pokemonsTypes($type_flying, "flying", $image_class)}
         .pk__type--poison { @include pokemonsTypes($type_poison, "poison", $image_class)}
         .pk__type--ground { @include pokemonsTypes($type_ground, "ground", $image_class)}

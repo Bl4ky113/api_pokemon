@@ -606,14 +606,14 @@
 .main .pokedex .command-menu .pklist .pk .pk__type--normal .pk__type-image {
   background-image: url("../img/types_icons/normal.webp");
 }
-.main .pokedex .command-menu .pklist .pk .pk__type--fighter {
+.main .pokedex .command-menu .pklist .pk .pk__type--fighting {
   border-color: #d4711f;
   background-color: #d4711f;
 }
-.main .pokedex .command-menu .pklist .pk .pk__type--fighter::after {
+.main .pokedex .command-menu .pklist .pk .pk__type--fighting::after {
   content: "fighting";
 }
-.main .pokedex .command-menu .pklist .pk .pk__type--fighter .pk__type-image {
+.main .pokedex .command-menu .pklist .pk .pk__type--fighting .pk__type-image {
   background-image: url("../img/types_icons/fighting.webp");
 }
 .main .pokedex .command-menu .pklist .pk .pk__type--flying {

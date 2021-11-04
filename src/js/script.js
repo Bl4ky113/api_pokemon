@@ -295,6 +295,33 @@ const changeMenuInfo = (element=Boolean) => {
 INPUT.info.r.onclick = () => changeMenuInfo(true);
 INPUT.info.l.onclick = () => changeMenuInfo(false);
 
+INPUT.pk_list.onclick = (e) => {
+  if (e.target.className === "pk") {
+    let pokemon = e.target.innerText.toLowerCase();
+    let api_urls = [];
+    let pokemon_data = {};
+    listInfo = [];
+    menuInfo = [];
+    
+    Object.values(API_DATA.search.pokemon).forEach(search_type => {
+      let url = `${API_DATA.url}${search_type}${pokemon}`;
+      api_urls.push(url);
+    });
+
+    api_urls.forEach((url, i) => {
+      getPokemonData(url)
+        .then( pk => { 
+            pokemon_data[`${Object.keys(API_DATA.search.pokemon)[i]}`] = pk;
+            if (Object.values(pokemon_data).length === api_urls.length) {
+              pokemon_data = clearPokemonData(pokemon_data);
+              showData(pokemon_data);
+            }
+        }).catch (e => console.log(e));
+    });
+    getListData(api_urls[0], pokemon_data);
+  }
+}
+
 INPUT.search.btn.onclick = () => {
   let pokemon = INPUT.search.text.value.toLowerCase();
   let api_urls = [];
