@@ -51,3 +51,15 @@
     } 
   }
 }
+
+@media screen and (max-width: 790px) {
+  .footer {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media screen and (max-width: 420px) {
+  .footer {
+    padding: 0.5rem;
+  }
+}

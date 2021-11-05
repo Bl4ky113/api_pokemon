@@ -7,48 +7,48 @@
   grid-area: header;
 
   display: flex;
-  flex-flow: row nowrap;
+  flex-flow: row wrap;
   align-items: center;
   justify-content: space-evenly;
 
-  .header-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
   .header__title {
     padding: 0.15rem 0.25rem;
+    border-bottom: 5px solid $color_darkred;
+    border-bottom-left-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
     
     font: 800 2em "Ubuntu", sans-serif;
     color: $color_white;
     text-align: center;
     
-    border-bottom: 5px solid $color_darkred;
-    border-bottom-left-radius: 0.5rem;
-    border-bottom-right-radius: 0.5rem;
-
     display: flex;
     justify-content: space-evenly;
     align-items: center;
   }
 
   .header__icon {
-    width: 4em;
+    width: 4rem;
     height: auto;
 
+    margin: 0 4vw;
+    border-radius: 0.5rem;
     padding: 0.15rem 0.25rem;
-    margin: 0 2rem;
-    border-radius: 0.5em;
 
     background-color: transparent;
-    background-image: url('../img/pokeball_red.png');
   }
 
   .header__author {
+    margin: 0.25rem 0;
+    
     font: 400 1.5em "Gemunu Libre", sans-serif;
     color: $color_darkred;
     text-align: center;
     text-decoration: underline;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .header {
+    .header__icon { width: 1.5em; }
   }
 }

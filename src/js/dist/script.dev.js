@@ -44,7 +44,7 @@ var OUTPUT = {
   },
   pk_list: get.id("pokemon_list")
 };
-var NUM_PK_LIST_OBJ = 12;
+var NUM_PK_LIST_OBJ = 10;
 var menuInfo = [];
 var menuInfo_index = 0;
 var listInfo = [];
@@ -150,6 +150,7 @@ var getListData = function getListData(main_data_url) {
           try {
             pokemon_list_url = [];
             OUTPUT.pk_list.innerHTML = "";
+            OUTPUT.pk_list.style = "grid-template-rows: repeat(".concat(NUM_PK_LIST_OBJ, ", 1fr)");
             getPokemonData(main_data_url).then(function (pk) {
               for (var id = pk.id; id < pk.id + NUM_PK_LIST_OBJ; id += 1) {
                 pokemon_list_url.push("".concat(API_DATA.url).concat(API_DATA.search.pokemon.main).concat(id));

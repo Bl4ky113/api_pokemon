@@ -37,7 +37,7 @@ let OUTPUT = {
   pk_list: get.id("pokemon_list")
 }
 
-const NUM_PK_LIST_OBJ = 12;
+const NUM_PK_LIST_OBJ = 10;
 
 let menuInfo = [];
 let menuInfo_index = 0;
@@ -106,6 +106,7 @@ const getListData = async (main_data_url) => {
   try {
     let pokemon_list_url = [];
     OUTPUT.pk_list.innerHTML = "";
+    OUTPUT.pk_list.style = `grid-template-rows: repeat(${NUM_PK_LIST_OBJ}, 1fr)`;
 
     getPokemonData(main_data_url)
       .then(pk => {

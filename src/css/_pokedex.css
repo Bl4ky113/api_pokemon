@@ -1,8 +1,8 @@
 @charset "UTF-8";
 /* Pokemon Type's Color */
 .pokedex {
-  width: 75%;
-  height: 95vh;
+  width: 90%;
+  height: 90vh;
   display: grid;
   grid-template: 6vh 1fr/1fr 1fr;
   grid-template-areas: "viewer clear" "viewer menu ";
@@ -314,7 +314,7 @@
   grid-area: info;
   background-color: #be0023;
   display: grid;
-  grid-template: 1fr/2em 1fr 2em;
+  grid-template: 1fr/4vw 1fr 4vw;
   grid-template-areas: "left content right";
   justify-items: stretch;
 }
@@ -352,12 +352,13 @@
   grid-area: content;
   display: grid;
   grid-template: auto/1fr 1fr;
-  grid-auto-rows: 1fr;
+  grid-auto-rows: auto;
   align-items: center;
   justify-items: stretch;
+  align-content: stretch;
 }
 .pokedex .pokemon-viewer .wrapper-viewer .info .info__title {
-  padding: 0.25rem 1rem;
+  padding: 0.15rem 1rem;
   border-radius: 0.25rem;
   border-top-right-radius: 0.75rem;
   grid-column: span 2;
@@ -365,13 +366,12 @@
   align-self: flex-start;
   background-color: #7e000f;
   color: #fff;
-  font: 400 1.2em "Gemunu Libre", sans-serif;
+  font: 400 1em "Gemunu Libre", sans-serif;
   text-transform: capitalize;
 }
 .pokedex .pokemon-viewer .wrapper-viewer .info .info__label {
   border-right: 2px solid #7e000f;
   border-bottom: 2px solid #7e000f;
-  margin-right: 2rem;
   grid-column: span 1;
   grid-row: span 1;
   color: #fff;
@@ -469,12 +469,11 @@
 .pokedex .command-menu .pklist .wrapper-pk {
   max-height: 100%;
   display: grid;
-  grid-template: repeat(12, 1fr)/1fr;
   align-items: center;
 }
 .pokedex .command-menu .pklist .pk {
   margin: 0 0.5rem;
-  padding: 0.5rem;
+  padding: 0.25rem 0.5rem;
   border: 1px solid #be0023;
   color: #fff;
   font: 300 1rem "Gemunu Libre", sans-serif;
@@ -709,4 +708,26 @@
 }
 .pokedex .command-menu .pklist .pk .pk__type--fairy .pk__type-image {
   background-image: url("../img/types_icons/fairy.webp");
+}
+
+@media screen and (max-width: 930px) {
+  .pokedex {
+    height: 160vh;
+    grid-template: 6vh 1fr 1fr/1fr;
+    grid-template-areas: "viewer" "viewer" "menu  ";
+  }
+  .pokedex .pokemon-viewer {
+    grid-template: 6vh 1fr 1.5rem/1fr;
+    grid-template-areas: "decoration" "w-viewer  " "separator ";
+  }
+  .pokedex .pokemon-viewer .separator {
+    padding: 0 2.5rem;
+    flex-flow: row nowrap;
+    align-items: stretch;
+    justify-content: space-between;
+  }
+  .pokedex .pokemon-viewer .separator .separator__hinge {
+    height: auto;
+    width: 20%;
+  }
 }
